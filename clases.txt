@@ -1,0 +1,7 @@
+clases
+Database //metodos para agregar nuevas tablas y insertar campos ademas de gestionar la conn 
+Flight // clase para vuelos setter getter method
+AviationAPI // Fetch de datos de la api (metodos parametrizados , status, arrival, depature, bla bla bla )
+AviationService // consumir los datos retornados de AviationAPI y los metodos de Database para guardar estos)
+
+Main // va a disparar los o el metodo que hace todo

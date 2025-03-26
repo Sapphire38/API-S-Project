@@ -85,7 +85,10 @@ public class AviationAPI {
         }
     }
 
+    static String[] airport = ["GCLP" , "ARG"]
+    static String[] status = ["active" , "landed"]
+
     private String urlLink() {
-        return "http://api.aviationstack.com/v1/flights?access_key=" + apiKey + "&arr_icao=GCLP&flight_status=landed";
+        return "http://api.aviationstack.com/v1/flights?access_key=" + apiKey + "&arr_icao=" + airport + "&flight_status=" + status;
     }
 }

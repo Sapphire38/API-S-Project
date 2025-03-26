@@ -7,7 +7,7 @@ public class Main {
         try {
             AviationAPI api = new AviationAPI(System.getenv("apiKey")).fetch();
             api.startScheduledDataFetch();
-            new AviationDB(new File("flights.db")).insert(api.flights());
+            new AviationDB(new File(System.getenv("database"))).insert(api.flights());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
