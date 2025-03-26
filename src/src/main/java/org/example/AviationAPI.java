@@ -5,7 +5,6 @@ import okhttp3.Response;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.IOException;
-import java.sql.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -43,13 +42,7 @@ public class AviationAPI {
         this.flights = jsonResponse.getJSONArray("data");
     }
 
-    public static void main(String[] args) {
-        createDatabase();
-        listTables();
-        startScheduledDataFetch();
-    }
-
-    private static void startScheduledDataFetch() {
+    protected void startScheduledDataFetch() {
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
         scheduler.scheduleAtFixedRate(() -> {
             System.out.println("Consultando datos de vuelos...");
@@ -70,7 +63,6 @@ public class AviationAPI {
                     return;
                 }
 
-                saveFlightsToDatabase(flights);
             }
         }, 0, 7, TimeUnit.DAYS);
     }

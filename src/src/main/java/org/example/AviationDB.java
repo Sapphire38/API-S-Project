@@ -25,7 +25,7 @@ public class AviationDB {
         return null;
     }
 
-    private void createDatabase() throws SQLException {
+    public void createDatabase() throws SQLException {
         try (Connection conn = DriverManager.getConnection(dbUrl())) {
             if (conn != null) {
                 String createTableSQL = "CREATE TABLE IF NOT EXISTS flights (" +
@@ -58,7 +58,7 @@ public class AviationDB {
         }
     }
 
-    private static void saveFlightsToDatabase(JSONArray flights) {
+    private void saveFlightsToDatabase(JSONArray flights) {
         try (Connection conn = DriverManager.getConnection(dbUrl());
              PreparedStatement pstmt = conn.prepareStatement(insertFlightSql)) {
 
@@ -73,25 +73,11 @@ public class AviationDB {
             handleSQLException(e, "Error al guardar vuelos en la base de datos.");
         }
     }
-    private static void listTables() {
-        String sql = "SELECT name FROM sqlite_master WHERE type='table'";
-        try (Connection conn = DriverManager.getConnection(dbUrl());
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-            System.out.println("Tablas en la base de datos:");
-            while (rs.next()) {
-                System.out.println(" - " + rs.getString("name"));
-            }
-        } catch (SQLException e) {
-            handleSQLException(e, "Error al listar las tablas.");
-        }
-    }
 
     private static void handleSQLException(SQLException e, String message) {
         System.out.println(message);
         e.printStackTrace();
     }
-
 
     private String dbUrl() {
         return "jdbc:sqlite:" + file.getAbsolutePath();
